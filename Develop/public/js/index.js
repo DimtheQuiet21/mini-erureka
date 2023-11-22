@@ -3,6 +3,7 @@ let noteTitle;
 let noteText;
 let saveNoteBtn;
 let newNoteBtn;
+let clearBtn;
 let noteList;
 
 if (window.location.pathname === '/notes') {
@@ -28,6 +29,12 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
+const make_id = () => {
+  return Math.floor((1 + Math.random()) * 0x10000)
+  .toString(16)
+  .substring(1);
+}
+
 const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
@@ -45,12 +52,13 @@ const saveNote = (note) =>
     body: JSON.stringify(note)
   });
 
-const deleteNote = (id) =>
+const deleteNote = (id,note2delete) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
-    }
+    },
+    body: JSON.stringify(note2delete)
   });
 
 const renderActiveNote = () => {
@@ -75,7 +83,8 @@ const renderActiveNote = () => {
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
-    text: noteText.value
+    text: noteText.value,
+    id : make_id()
   };
   saveNote(newNote).then(() => {
     getAndRenderNotes();
@@ -90,12 +99,14 @@ const handleNoteDelete = (e) => {
 
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+  console.log(noteId);
+  const deleteID = {id: noteId}
 
   if (activeNote.id === noteId) {
     activeNote = {};
   }
 
-  deleteNote(noteId).then(() => {
+  deleteNote(noteId,deleteID).then(() => {
     getAndRenderNotes();
     renderActiveNote();
   });
