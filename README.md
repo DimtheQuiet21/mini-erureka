@@ -34,10 +34,14 @@ N/A
 
 ## Deployed Website 
 Link to Alan Lee's Mini-Notetaker: https://dashboard.heroku.com/apps/mini-eureka-21-app
+
 Link to Deployed Application: https://mini-eureka-21-app-2788c8a726d6.herokuapp.com/ 
+
+Link to Alan Leet's GitHub on Mini-Notetaker: https://github.com/DimtheQuiet21/mini-erureka
+
 Link to VIDEO of Alan Lee's Mini-Notetaker: https://www.youtube.com/watch?v=nwuIOqCLhJQ 
 
-![Screenshot of Mini-Notetaker](./assets/screenshot.png)
+![Screenshot of Mini-Notetaker](./Develop/assets/screenshot.png)
 
 
 ## Questions?
